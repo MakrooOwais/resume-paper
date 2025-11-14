@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReSuMe: Retriever-Summarizer Mutual Enhancement via Reinforcement Learning</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>ReSuMe</h1>
+                    <span>Retriever-Summarizer Mutual Enhancement</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#evolution">Summary Evolution</a></li>
+                    <li><a href="#metrics">Metrics & Curves</a></li>
+                    <li><a href="#results">Additional Results</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#code">Code & Data</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>ReSuMe: Retriever-Summarizer Mutual Enhancement via Reinforcement Learning</h1>
+                <p class="subtitle">A general framework for mutual enhancement of dense retrieval systems and document summarizers through reinforcement learning</p>
+                <div class="paper-info">
+                    <div class="conference">WWW '26 - Proceedings of the ACM Web Conference 2026</div>
+                    <div class="metrics">
+                        <span class="metric">🎯 <strong>28.1%</strong> improvement in MRR@10</span>
+                        <span class="metric">📈 <strong>10.3%</strong> improvement in Recall@100</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="#" class="btn btn-primary">📄 Read Paper</a>
+                    <a href="#code" class="btn btn-secondary">💻 View Code</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <div class="container">
+                <h2>Overview</h2>
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>🎯 Problem</h3>
+                        <p>Distribution shift problem when retrieval models trained on full documents must operate on synthetic summaries during inference.</p>
+                    </div>
+                    <div class="overview-card">
+                        <h3>💡 Solution</h3>
+                        <p>Joint optimization through alternating fine-tuning phases using Group Relative Policy Optimization (GRPO) and contrastive learning.</p>
+                    </div>
+                    <div class="overview-card">
+                        <h3>📊 Results</h3>
+                        <p>Consistent improvements over non-iterative approaches on MS-MARCO dataset with model-agnostic framework.</p>
+                    </div>
+                </div>
+                
+                <div class="abstract-section">
+                    <h3>Abstract</h3>
+                    <p>We present ReSuMe, a general framework for mutual enhancement of dense retrieval systems and document summarizers through reinforcement learning. The framework jointly optimizes a language model for generating retrieval-oriented summaries and adapts the retrieval model to these summaries through alternating fine-tuning phases. We employ Group Relative Policy Optimization (GRPO) to fine-tune the language model based on retrieval relevance rather than linguistic quality alone, while the retrieval model is iteratively updated using contrastive learning on the generated summaries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Evolution Section -->
+        <section id="evolution" class="section bg-light">
+            <div class="container">
+                <h2>Summary Evolution Across Iterations</h2>
+                <p class="section-description">Observe how the generated summaries evolve through each iteration of the ReSuMe framework, becoming more retrieval-oriented and effective.</p>
+                
+                <div class="evolution-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="iteration0">Iteration 0 (Base)</button>
+                        <button class="tab-btn" data-tab="iteration1">Iteration 1</button>
+                        <button class="tab-btn" data-tab="iteration2">Iteration 2</button>
+                        <button class="tab-btn" data-tab="iteration3">Iteration 3 (Final)</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="iteration0">
+                            <div class="example-container">
+                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
+                                <div class="summary-comparison">
+                                    <div class="summary-box">
+                                        <h5>Original Document (Excerpt)</h5>
+                                        <p class="document-text">Machine learning algorithms are computational methods that enable systems to automatically learn and improve from experience without being explicitly programmed. Classification algorithms are a subset of supervised learning techniques that categorize data points into predefined classes or categories. Popular classification algorithms include decision trees, support vector machines, random forests, and neural networks. These algorithms analyze training data to identify patterns and relationships between input features and target classes, then use this knowledge to predict the class of new, unseen data points.</p>
+                                    </div>
+                                    <div class="summary-box">
+                                        <h5>Generated Summary (Iteration 0 - Baseline)</h5>
+                                        <p class="summary-text">This document discusses machine learning algorithms, particularly classification methods. It mentions several popular algorithms like decision trees and neural networks that can categorize data into different classes.</p>
+                                        <div class="metrics-small">
+                                            <span>Retrieval Score: <strong>0.65</strong></span>
+                                            <span>ROUGE-L: <strong>0.42</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="analysis-note">
+                                    <p><strong>Analysis:</strong> The baseline summary is generic and lacks specific technical terms that would improve retrieval performance. It misses key concepts like "supervised learning" and specific algorithm names.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="iteration1">
+                            <div class="example-container">
+                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
+                                <div class="summary-comparison">
+                                    <div class="summary-box">
+                                        <h5>Original Document (Excerpt)</h5>
+                                        <p class="document-text">[Same original document excerpt]</p>
+                                    </div>
+                                    <div class="summary-box">
+                                        <h5>Generated Summary</h5>
+                                        <p class="summary-text">[Add iteration 1 summary here - more retrieval-oriented]</p>
+                                        <div class="metrics-small">
+                                            <span>Retrieval Score: <strong>0.72</strong></span>
+                                            <span>ROUGE-L: <strong>0.45</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more examples for iteration 1 -->
+                        </div>
+                        
+                        <!-- Similar structure for iterations 2 and 3 -->
+                        <div class="tab-pane" id="iteration2">
+                            <div class="example-container">
+                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
+                                <div class="summary-comparison">
+                                    <div class="summary-box">
+                                        <h5>Original Document (Excerpt)</h5>
+                                        <p class="document-text">[Same original document excerpt]</p>
+                                    </div>
+                                    <div class="summary-box">
+                                        <h5>Generated Summary</h5>
+                                        <p class="summary-text">[Add iteration 2 summary here - further improved]</p>
+                                        <div class="metrics-small">
+                                            <span>Retrieval Score: <strong>0.81</strong></span>
+                                            <span>ROUGE-L: <strong>0.48</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="iteration3">
+                            <div class="example-container">
+                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
+                                <div class="summary-comparison">
+                                    <div class="summary-box">
+                                        <h5>Original Document (Excerpt)</h5>
+                                        <p class="document-text">[Same original document excerpt]</p>
+                                    </div>
+                                    <div class="summary-box">
+                                        <h5>Generated Summary</h5>
+                                        <p class="summary-text">[Add iteration 3 final summary here - optimally retrieval-oriented]</p>
+                                        <div class="metrics-small">
+                                            <span>Retrieval Score: <strong>0.89</strong></span>
+                                            <span>ROUGE-L: <strong>0.51</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics and Curves Section -->
+        <section id="metrics" class="section">
+            <div class="container">
+                <h2>Training Metrics & Reward Curves</h2>
+                <p class="section-description">Visualization of the evolution of various metrics throughout the training process.</p>
+                
+                <div class="metrics-grid">
+                    <div class="chart-container">
+                        <h3>Retrieval Reward Evolution</h3>
+                        <canvas id="rewardChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>MRR@10 Performance</h3>
+                        <canvas id="mrrChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Recall@100 Performance</h3>
+                        <canvas id="recallChart"></canvas>
+                    </div>
+                    
+                    <!-- <div class="chart-container">
+                        <h3>Summary Quality Metrics</h3>
+                        <canvas id="qualityChart"></canvas>
+                    </div> -->
+                </div>
+                
+                <!-- Performance Comparison Table -->
+                <div class="performance-table">
+                    <h3>Performance Comparison</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>MRR@10</th>
+                                <th>Recall@100</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baseline (Contriever)</td>
+                                <td>0.245</td>
+                                <td>0.734</td>
+                            </tr>
+                            <tr>
+                                <td>Non-iterative Summary</td>
+                                <td>0.267</td>
+                                <td>0.756</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td><strong>ReSuMe (Ours)</strong></td>
+                                <td><strong>0.342</strong></td>
+                                <td><strong>0.834</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Results Section -->
+        <section id="results" class="section bg-light">
+            <div class="container">
+                <h2>Additional Results & Analysis</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Ablation Studies</h3>
+                        <p>Comprehensive ablation studies showing the contribution of each component in the ReSuMe framework.</p>
+                        <div class="result-content">
+                            <!-- Add charts or tables for ablation studies -->
+                            <div class="placeholder">Ablation study results will be displayed here</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Cross-Dataset Evaluation</h3>
+                        <p>Performance evaluation on multiple datasets to demonstrate generalizability.</p>
+                        <div class="result-content">
+                            <div class="placeholder">Cross-dataset evaluation results will be displayed here</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Error Analysis</h3>
+                        <p>Detailed error analysis and failure cases to understand model limitations.</p>
+                        <div class="result-content">
+                            <div class="placeholder">Error analysis will be displayed here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section id="methodology" class="section">
+            <div class="container">
+                <h2>Methodology Visualization</h2>
+                <p class="section-description">Visualization of the ReSuMe framework architecture and training process.</p>
+                
+                <div class="methodology-content">
+                    <div class="framework-diagram">
+                        <h3>Framework Architecture</h3>
+                        <div class="diagram-placeholder">
+                            <!-- Add interactive diagram here -->
+                            <img src="ReSuMe.drawio.svg" alt="ReSuMe Framework Architecture" style="width: 100%; height: auto;">
+                        </div>
+                    </div>
+                    
+                    <div class="algorithm-steps">
+                        <h3>Training Algorithm</h3>
+                        <div class="steps-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Generate Summaries</h4>
+                                    <p>Use current summarization model to generate summaries for training documents.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Compute Retrieval Rewards</h4>
+                                    <p>Evaluate summaries using retrieval model and compute reward signals.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Update Summarizer</h4>
+                                    <p>Fine-tune summarization model using GRPO based on retrieval rewards.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Update Retriever</h4>
+                                    <p>Update retrieval model using contrastive learning on generated summaries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code and Data Section -->
+        <section id="code" class="section bg-light">
+            <div class="container">
+                <h2>Code & Data</h2>
+                <p class="section-description">Access the implementation, datasets, and supplementary materials.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">💻</div>
+                        <h3>Source Code</h3>
+                        <p>Complete implementation of the ReSuMe framework with training and evaluation scripts.</p>
+                        <a href="#" class="btn btn-primary">View on GitHub</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📊</div>
+                        <h3>Datasets</h3>
+                        <p>Processed MS-MARCO dataset and generated summaries from each iteration.</p>
+                        <a href="#" class="btn btn-primary">Download Data</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📋</div>
+                        <h3>Pre-trained Models</h3>
+                        <p>Pre-trained ReSuMe models ready for inference and fine-tuning.</p>
+                        <a href="#" class="btn btn-primary">Download Models</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-icon">📝</div>
+                        <h3>Supplementary Material</h3>
+                        <p>Additional experimental results, hyperparameters, and detailed analysis.</p>
+                        <a href="#" class="btn btn-primary">View Supplement</a>
+                    </div>
+                </div>
+                
+                <div class="citation-section">
+                    <h3>Citation</h3>
+                    <div class="citation-box">
+                        <pre><code>@inproceedings{resume2026,
+  title={ReSuMe: Retriever-Summarizer Mutual Enhancement via Reinforcement Learning},
+  author={[Author Names]},
+  booktitle={Proceedings of the ACM Web Conference 2026},
+  pages={[Page Numbers]},
+  year={2026},
+  publisher={ACM}
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReSuMe Paper. All rights reserved. | WWW '26 Conference</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
