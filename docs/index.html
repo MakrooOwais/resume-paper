@@ -35,10 +35,10 @@
                 <h1>ReSuMe: Retriever-Summarizer Mutual Enhancement via Reinforcement Learning</h1>
                 <p class="subtitle">A general framework for mutual enhancement of dense retrieval systems and document summarizers through reinforcement learning</p>
                 <div class="paper-info">
-                    <div class="conference">WWW '26 - Proceedings of the ACM Web Conference 2026</div>
+                    <div class="conference"><strong>Submitted to WWW '26</strong> - The ACM Web Conference 2026 (Under Review)</div>
                     <div class="metrics">
-                        <span class="metric">🎯 <strong>28.1%</strong> improvement in MRR@10</span>
-                        <span class="metric">📈 <strong>10.3%</strong> improvement in Recall@100</span>
+                        <span class="metric">🎯 <strong>13.2%</strong> relative improvement in MRR@10</span>
+                        <span class="metric">📈 <strong>6.7%</strong> relative improvement in Recall@100</span>
                     </div>
                 </div>
                 <div class="action-buttons">
@@ -69,7 +69,7 @@
                 
                 <div class="abstract-section">
                     <h3>Abstract</h3>
-                    <p>We present ReSuMe, a general framework for mutual enhancement of dense retrieval systems and document summarizers through reinforcement learning. The framework jointly optimizes a language model for generating retrieval-oriented summaries and adapts the retrieval model to these summaries through alternating fine-tuning phases. We employ Group Relative Policy Optimization (GRPO) to fine-tune the language model based on retrieval relevance rather than linguistic quality alone, while the retrieval model is iteratively updated using contrastive learning on the generated summaries.</p>
+                    <p>We present ReSuMe, a general framework for mutual enhancement of dense retrieval systems and document summarizers through reinforcement learning. The framework jointly optimizes a language model for generating retrieval-oriented summaries and adapts the retrieval model to these summaries through alternating fine-tuning phases. We employ Group Relative Policy Optimization (GRPO) to fine-tune the language model based on retrieval relevance rather than linguistic quality alone, while the retrieval model is iteratively updated using contrastive learning on the generated summaries. This co-optimization process addresses the fundamental distribution shift problem that arises when retrieval models trained on full documents must operate on synthetic summaries during inference. By progressively reducing this distribution gap, our framework yields two key benefits: improved retrieval performance and a high-quality document summarizer optimized for retrieval tasks. We demonstrate our framework using Contriever on the MS-MARCO dataset, achieving consistent improvements of <b>28.1% in MRR@10</b> and <b>10.3% in Recall@100</b> over non-iterative approaches. The framework is model-agnostic and can be applied to enhance any dense retrieval system while simultaneously producing an effective document summarization model.</p>
                 </div>
             </div>
         </section>
@@ -82,97 +82,17 @@
                 
                 <div class="evolution-tabs">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="iteration0">Iteration 0 (Base)</button>
-                        <button class="tab-btn" data-tab="iteration1">Iteration 1</button>
-                        <button class="tab-btn" data-tab="iteration2">Iteration 2</button>
-                        <button class="tab-btn" data-tab="iteration3">Iteration 3 (Final)</button>
+                        <button class="tab-btn active" data-tab="iteration0">Base</button>
+                        <button class="tab-btn" data-tab="iteration1">Iteration 0</button>
+                        <button class="tab-btn" data-tab="iteration2">Iteration 1</button>
+                        <button class="tab-btn" data-tab="iteration3">Iteration 2</button>
+                        <button class="tab-btn" data-tab="iteration4">Iteration 3</button>
+                        <button class="tab-btn" data-tab="iteration5">Iteration 4</button>
+                        <button class="tab-btn" data-tab="iteration6">Iteration 5 (Final)</button>
                     </div>
                     
                     <div class="tab-content">
-                        <div class="tab-pane active" id="iteration0">
-                            <div class="example-container">
-                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
-                                <div class="summary-comparison">
-                                    <div class="summary-box">
-                                        <h5>Original Document (Excerpt)</h5>
-                                        <p class="document-text">Machine learning algorithms are computational methods that enable systems to automatically learn and improve from experience without being explicitly programmed. Classification algorithms are a subset of supervised learning techniques that categorize data points into predefined classes or categories. Popular classification algorithms include decision trees, support vector machines, random forests, and neural networks. These algorithms analyze training data to identify patterns and relationships between input features and target classes, then use this knowledge to predict the class of new, unseen data points.</p>
-                                    </div>
-                                    <div class="summary-box">
-                                        <h5>Generated Summary (Iteration 0 - Baseline)</h5>
-                                        <p class="summary-text">This document discusses machine learning algorithms, particularly classification methods. It mentions several popular algorithms like decision trees and neural networks that can categorize data into different classes.</p>
-                                        <div class="metrics-small">
-                                            <span>Retrieval Score: <strong>0.65</strong></span>
-                                            <span>ROUGE-L: <strong>0.42</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="analysis-note">
-                                    <p><strong>Analysis:</strong> The baseline summary is generic and lacks specific technical terms that would improve retrieval performance. It misses key concepts like "supervised learning" and specific algorithm names.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-pane" id="iteration1">
-                            <div class="example-container">
-                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
-                                <div class="summary-comparison">
-                                    <div class="summary-box">
-                                        <h5>Original Document (Excerpt)</h5>
-                                        <p class="document-text">[Same original document excerpt]</p>
-                                    </div>
-                                    <div class="summary-box">
-                                        <h5>Generated Summary</h5>
-                                        <p class="summary-text">[Add iteration 1 summary here - more retrieval-oriented]</p>
-                                        <div class="metrics-small">
-                                            <span>Retrieval Score: <strong>0.72</strong></span>
-                                            <span>ROUGE-L: <strong>0.45</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Add more examples for iteration 1 -->
-                        </div>
-                        
-                        <!-- Similar structure for iterations 2 and 3 -->
-                        <div class="tab-pane" id="iteration2">
-                            <div class="example-container">
-                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
-                                <div class="summary-comparison">
-                                    <div class="summary-box">
-                                        <h5>Original Document (Excerpt)</h5>
-                                        <p class="document-text">[Same original document excerpt]</p>
-                                    </div>
-                                    <div class="summary-box">
-                                        <h5>Generated Summary</h5>
-                                        <p class="summary-text">[Add iteration 2 summary here - further improved]</p>
-                                        <div class="metrics-small">
-                                            <span>Retrieval Score: <strong>0.81</strong></span>
-                                            <span>ROUGE-L: <strong>0.48</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="tab-pane" id="iteration3">
-                            <div class="example-container">
-                                <h4>Example 1: Query - "machine learning algorithms classification"</h4>
-                                <div class="summary-comparison">
-                                    <div class="summary-box">
-                                        <h5>Original Document (Excerpt)</h5>
-                                        <p class="document-text">[Same original document excerpt]</p>
-                                    </div>
-                                    <div class="summary-box">
-                                        <h5>Generated Summary</h5>
-                                        <p class="summary-text">[Add iteration 3 final summary here - optimally retrieval-oriented]</p>
-                                        <div class="metrics-small">
-                                            <span>Retrieval Score: <strong>0.89</strong></span>
-                                            <span>ROUGE-L: <strong>0.51</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Content will be dynamically generated by JavaScript -->
                     </div>
                 </div>
             </div>
@@ -199,39 +119,81 @@
                         <h3>Recall@100 Performance</h3>
                         <canvas id="recallChart"></canvas>
                     </div>
-                    
-                    <!-- <div class="chart-container">
-                        <h3>Summary Quality Metrics</h3>
-                        <canvas id="qualityChart"></canvas>
-                    </div> -->
                 </div>
                 
                 <!-- Performance Comparison Table -->
                 <div class="performance-table">
-                    <h3>Performance Comparison</h3>
+                    <h3>Performance Comparison on MS-MARCO</h3>
                     <table>
                         <thead>
                             <tr>
                                 <th>Method</th>
                                 <th>MRR@10</th>
-                                <th>Recall@100</th>
+                                <th>NDCG@10</th>
+                                <th>R@100</th>
+                                <th>R@1000</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Baseline (Contriever)</td>
-                                <td>0.245</td>
-                                <td>0.734</td>
+                                <td>Baseline</td>
+                                <td>0.266</td>
+                                <td>0.324</td>
+                                <td>0.819</td>
+                                <td>0.954</td>
                             </tr>
                             <tr>
-                                <td>Non-iterative Summary</td>
-                                <td>0.267</td>
-                                <td>0.756</td>
+                                <td>Fixed Summary</td>
+                                <td>0.234</td>
+                                <td>0.290</td>
+                                <td>0.789</td>
+                                <td>0.943</td>
+                            </tr>
+                            <tr>
+                                <td>Non-iterative</td>
+                                <td>0.235</td>
+                                <td>0.291</td>
+                                <td>0.792</td>
+                                <td>0.942</td>
                             </tr>
                             <tr class="highlight">
-                                <td><strong>ReSuMe (Ours)</strong></td>
-                                <td><strong>0.342</strong></td>
-                                <td><strong>0.834</strong></td>
+                                <td><strong>Iterative (Ours)</strong></td>
+                                <td><strong>0.301</strong></td>
+                                <td><strong>0.368</strong></td>
+                                <td><strong>0.874</strong></td>
+                                <td><strong>0.976</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3 style="margin-top: 30px;">Out-of-Distribution Performance on NFCorpus</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>MRR@10</th>
+                                <th>NDCG@10</th>
+                                <th>R@100</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baseline</td>
+                                <td>0.501</td>
+                                <td>0.305</td>
+                                <td>0.290</td>
+                            </tr>
+                            <tr>
+                                <td>Fixed Summary</td>
+                                <td>0.470</td>
+                                <td>0.280</td>
+                                <td>0.283</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td><strong>Iterative (Ours)</strong></td>
+                                <td><strong>0.535</strong></td>
+                                <td><strong>0.329</strong></td>
+                                <td><strong>0.303</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -248,25 +210,33 @@
                     <div class="result-card">
                         <h3>Ablation Studies</h3>
                         <p>Comprehensive ablation studies showing the contribution of each component in the ReSuMe framework.</p>
-                        <div class="result-content">
-                            <!-- Add charts or tables for ablation studies -->
-                            <div class="placeholder">Ablation study results will be displayed here</div>
-                        </div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <h3>Cross-Dataset Evaluation</h3>
-                        <p>Performance evaluation on multiple datasets to demonstrate generalizability.</p>
-                        <div class="result-content">
-                            <div class="placeholder">Cross-dataset evaluation results will be displayed here</div>
-                        </div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <h3>Error Analysis</h3>
-                        <p>Detailed error analysis and failure cases to understand model limitations.</p>
-                        <div class="result-content">
-                            <div class="placeholder">Error analysis will be displayed here</div>
+                        <div class="performance-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td><strong>Configuration</strong></td>
+                                        <td><strong>MRR@10</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td><strong>Full model</strong></td>
+                                        <td><strong>0.301</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>w/o retrieval adaptation</td>
+                                        <td>0.235</td>
+                                    </tr>
+                                    <tr>
+                                        <td>w/o negative queries</td>
+                                        <td>0.294</td>
+                                    </tr>
+                                    <tr>
+                                        <td>w/o discrete reward</td>
+                                        <td>0.286</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -349,28 +319,29 @@
                     <div class="resource-card">
                         <div class="resource-icon">📋</div>
                         <h3>Pre-trained Models</h3>
-                        <p>Pre-trained ReSuMe models ready for inference and fine-tuning.</p>
+                        <p>Pre-trained ReSuMe models ready for inference and fine-tuning.<br><br></p>
                         <a href="#" class="btn btn-primary">Download Models</a>
                     </div>
                     
-                    <div class="resource-card">
+                    <!-- <div class="resource-card">
                         <div class="resource-icon">📝</div>
                         <h3>Supplementary Material</h3>
                         <p>Additional experimental results, hyperparameters, and detailed analysis.</p>
                         <a href="#" class="btn btn-primary">View Supplement</a>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="citation-section">
                     <h3>Citation</h3>
+                    <p style="color: #666; font-style: italic; margin-bottom: 15px;">
+                        <strong>Note:</strong> This paper is currently under review for WWW '26. Citation format will be updated upon acceptance.
+                    </p>
                     <div class="citation-box">
-                        <pre><code>@inproceedings{resume2026,
+                        <pre><code>@misc{resume2024,
   title={ReSuMe: Retriever-Summarizer Mutual Enhancement via Reinforcement Learning},
-  author={[Author Names]},
-  booktitle={Proceedings of the ACM Web Conference 2026},
-  pages={[Page Numbers]},
-  year={2026},
-  publisher={ACM}
+  author={Owais Makroo, Nikhil Pattisapu, Karan Gupta, Ankit Gandhi, Vijay Huddar, Atul Saroop},
+  year={2024},
+  note={Submitted to WWW '26 Conference}
 }</code></pre>
                     </div>
                 </div>
